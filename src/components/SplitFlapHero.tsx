@@ -110,7 +110,7 @@ function ScoreboardChar({
   return (
     <span
       className="relative inline-flex items-center justify-center overflow-hidden
-        w-[2.8rem] h-[3.6rem]
+        w-[2.2rem] h-[2.8rem]
         sm:w-[3.4rem] sm:h-[4.4rem]
         lg:w-[4rem] lg:h-[5rem]"
       style={{
@@ -121,7 +121,7 @@ function ScoreboardChar({
       {/* Cream plate with Sox red text */}
       <span
         className="absolute inset-0 flex items-center justify-center
-          text-2xl sm:text-3xl lg:text-4xl
+          text-xl sm:text-3xl lg:text-4xl
           font-bold tracking-wide"
         style={{
           fontFamily: "var(--font-inter), system-ui, sans-serif",
@@ -249,7 +249,7 @@ export default function SplitFlapHero({
       <h1 className="sr-only">Alex Evenson</h1>
 
       <motion.p
-        className="text-[12px] tracking-[0.2em] uppercase text-[#d4a843] mb-5"
+        className="text-[11px] sm:text-[12px] tracking-[0.2em] uppercase text-[#d4a843] mb-3 sm:mb-5"
         initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, delay: reducedMotion ? 0 : 0.2 }}
@@ -273,14 +273,14 @@ export default function SplitFlapHero({
       >
         <div className="flex flex-col">
           {/* Top rivet row */}
-          <div className="flex items-center gap-[10px] sm:gap-3 px-2.5 sm:px-3 py-1.5">
+          <div className="flex items-center gap-[8px] sm:gap-3 px-2 sm:px-3 py-1 sm:py-1.5">
             <Rivet /><Rivet /><Rivet /><Rivet /><Rivet />
             <Rivet /><Rivet /><Rivet /><Rivet />
           </div>
 
           <div className="flex items-stretch">
             {/* Cells */}
-            <div className="flex flex-col gap-[2px] sm:gap-[3px] px-2.5 sm:px-3">
+            <div className="flex flex-col gap-[2px] sm:gap-[3px] px-2 sm:px-3">
               {/* Row 1: ALEX */}
               <div className="flex gap-[2px] sm:gap-[3px]">
                 {firstName.split("").map((char, i) => (
@@ -314,9 +314,9 @@ export default function SplitFlapHero({
           </div>
 
           {/* Bottom rivet row with 37 marker */}
-          <div className="flex items-center gap-[10px] sm:gap-3 px-2.5 sm:px-3 py-1.5 relative">
+          <div className="flex items-center gap-[8px] sm:gap-3 px-2 sm:px-3 py-1 sm:py-1.5 relative">
             <span
-              className="absolute left-2.5 sm:left-3 font-[family-name:var(--font-eb-garamond)] italic text-[11px]"
+              className="absolute left-2 sm:left-3 font-[family-name:var(--font-eb-garamond)] italic text-[11px]"
               style={{ color: "rgba(244,238,213,0.1)" }}
               title="Height of the Green Monster: 37 feet"
             >
@@ -330,7 +330,7 @@ export default function SplitFlapHero({
       </div>
 
       {/* Gold rule */}
-      <div className="mt-6 h-[2px]">
+      <div className="mt-4 sm:mt-6 h-[2px]">
         <motion.div
           className="h-full bg-[#d4a843]"
           initial={reducedMotion ? { width: 60 } : { width: 0 }}
@@ -344,7 +344,7 @@ export default function SplitFlapHero({
       </div>
 
       {/* Tagline */}
-      <div className="mt-6 min-h-[3.5rem]">
+      <div className="mt-4 sm:mt-6 min-h-[3.5rem]">
         <motion.p
           className="font-[family-name:var(--font-cormorant)] text-xl leading-relaxed text-[#f4eed5]/60 font-light italic"
           initial={
@@ -370,7 +370,7 @@ export default function SplitFlapHero({
           delay: revealDelay + 0.4,
         }}
       >
-        Based in the Midwest, building for everywhere.
+        Kirkland, Washington — USA
       </motion.p>
 
       {/* Social links */}
