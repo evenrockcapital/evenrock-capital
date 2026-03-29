@@ -1,148 +1,196 @@
+import { Suspense } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { socials } from "@/data/socials";
 import { nowItems, nowUpdated } from "@/data/now";
+import { aboutItems } from "@/data/about";
 import SubstackFeed from "@/components/SubstackFeed";
+import SubstackFeedSkeleton from "@/components/SubstackFeedSkeleton";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import SplitFlapHero from "@/components/SplitFlapHero";
+import ScrollReveal from "@/components/ScrollReveal";
+import FadeIn from "@/components/FadeIn";
+import RivetedSeam from "@/components/RivetedSeam";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-stone-900 font-sans">
+    <div className="flex flex-col min-h-screen bg-[#0a2e17] text-[#f4eed5]">
       {/* Hero */}
       <section className="w-full pt-32 pb-20 sm:pt-40 sm:pb-28">
         <div className="max-w-6xl mx-auto px-8">
           <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-24">
-            {/* Headshot placeholder */}
-            <div className="w-48 h-48 lg:w-56 lg:h-56 rounded-2xl bg-stone-100 flex items-center justify-center text-stone-300 text-xs tracking-widest uppercase shrink-0">
-              Photo
-            </div>
-            <div className="flex-1 max-w-2xl">
-              <h1 className="text-5xl sm:text-6xl font-light tracking-tight leading-[1.1] text-stone-900">
-                Alex Evenson
-              </h1>
-              <p className="mt-6 text-xl leading-relaxed text-stone-500 font-light">
-                I believe the best products are the ones nobody thought were
-                possible at that price point. I&apos;m building two of them
-                right now.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-stone-400 font-light">
-                Founder. Builder. Advisor. Based in the Midwest, building for
-                everywhere.
-              </p>
-              {/* Social links */}
-              <div className="mt-8 flex items-center gap-3">
+            {/* Headshot */}
+            <FadeIn delay={0.1} className="shrink-0">
+              <div className="w-64 h-80 lg:w-72 lg:h-96 rounded-2xl overflow-hidden border border-[#d4a843]/20 relative">
+                <Image
+                  src="/headshot.jpg"
+                  alt="Alex Evenson"
+                  fill
+                  sizes="(min-width: 1024px) 288px, 256px"
+                  className="object-cover object-[center_20%]"
+                  style={{
+                    filter: "grayscale(100%) sepia(40%) hue-rotate(70deg) saturate(50%) brightness(0.85) contrast(1.1)",
+                  }}
+                  priority
+                />
+              </div>
+            </FadeIn>
+            <SplitFlapHero>
+              <div className="flex items-center gap-3">
                 {socials.map((s) => (
                   <a
                     key={s.name}
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center text-stone-400 hover:text-amber-800 hover:border-amber-700/40 transition-all duration-300"
+                    className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-[#d4a843] hover:border-[#d4a843]/40 hover:shadow-[0_0_12px_rgba(212,168,67,0.15)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#d4a843]"
                     title={s.name}
+                    aria-label={s.name}
                   >
                     {s.icon}
                   </a>
                 ))}
               </div>
-            </div>
+            </SplitFlapHero>
           </div>
         </div>
       </section>
 
+      <RivetedSeam />
+
       {/* Writing — TOP of page, the centerpiece */}
-      <section id="writing" className="w-full py-28 sm:py-36 bg-stone-50">
+      <section id="writing" className="w-full py-28 sm:py-36 bg-[#0f3d22]">
         <div className="max-w-6xl mx-auto px-8">
-          <p className="text-[13px] tracking-[0.15em] uppercase text-amber-800/60 mb-4">
-            01 — Writing
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-stone-900">
-            Thoughts &amp; essays
-          </h2>
-          <p className="mt-6 text-lg text-stone-500 font-light max-w-2xl">
-            On building, investing, and the things worth paying attention to.
-          </p>
-          <SubstackFeed />
+          <ScrollReveal>
+            <p className="text-[12px] tracking-[0.2em] uppercase text-[#d4a843]/60 mb-4">
+              01 — Writing
+            </p>
+            <h2 className="font-[family-name:var(--font-eb-garamond)] text-3xl sm:text-4xl font-normal italic tracking-tight text-[#f4eed5]">
+              Thoughts &amp; essays
+            </h2>
+            <p className="font-[family-name:var(--font-cormorant)] mt-6 text-lg text-[#f4eed5]/60 font-light italic max-w-2xl">
+              On building, investing, and the things worth paying attention to.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <Suspense fallback={<SubstackFeedSkeleton />}>
+              <SubstackFeed />
+            </Suspense>
+          </ScrollReveal>
         </div>
       </section>
+
+      <RivetedSeam />
 
       {/* Now */}
       <section id="now" className="w-full py-28 sm:py-36">
         <div className="max-w-6xl mx-auto px-8">
-          <div className="flex items-baseline justify-between mb-4">
-            <p className="text-[13px] tracking-[0.15em] uppercase text-amber-800/60">
-              02 — Now
-            </p>
-            <p className="text-[13px] tracking-wide text-stone-300">
-              Updated {nowUpdated}
-            </p>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-stone-900">
-            What I&apos;m working on
-          </h2>
+          <ScrollReveal>
+            <div className="flex items-baseline justify-between mb-4">
+              <p className="text-[12px] tracking-[0.2em] uppercase text-[#d4a843]/60">
+                02 — Now
+              </p>
+              <p className="text-[12px] tracking-wide text-white/40">
+                Updated {nowUpdated}
+              </p>
+            </div>
+            <h2 className="font-[family-name:var(--font-eb-garamond)] text-3xl sm:text-4xl font-normal italic tracking-tight text-[#f4eed5]">
+              What I&apos;m working on
+            </h2>
+          </ScrollReveal>
           <div className="mt-12 flex flex-col gap-6">
             {nowItems.map((item, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-4 border-l-2 border-stone-200 pl-6 py-1"
-              >
-                <p className="text-lg leading-relaxed text-stone-600 font-light">
-                  {item.text}
-                </p>
-              </div>
+              <ScrollReveal key={item.slug} delay={0.1 * (i + 1)}>
+                <Link
+                  href={`/now/${item.slug}`}
+                  className="group flex items-start gap-4 border-l-2 border-[#d4a843]/20 pl-6 py-1 hover:border-[#d4a843] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <div>
+                    <p className="font-[family-name:var(--font-cormorant)] text-lg leading-relaxed text-[#f4eed5]/60 font-light italic group-hover:text-[#f4eed5]/80 transition-colors duration-300">
+                      {item.text}
+                    </p>
+                    <span className="inline-block mt-2 text-[11px] tracking-[0.15em] uppercase text-[#d4a843]/25 group-hover:text-[#d4a843]/60 transition-colors duration-300">
+                      Read more &rarr;
+                    </span>
+                  </div>
+                </Link>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
+      <RivetedSeam className="bg-[#0f3d22]" />
+
       {/* About */}
-      <section id="about" className="w-full py-28 sm:py-36 bg-stone-50">
+      <section id="about" className="w-full py-28 sm:py-36 bg-[#0f3d22]">
         <div className="max-w-6xl mx-auto px-8">
-          <p className="text-[13px] tracking-[0.15em] uppercase text-amber-800/60 mb-4">
-            03 — About
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-stone-900">
-            A bit more
-          </h2>
-          <div className="mt-8 max-w-2xl space-y-6">
-            <p className="text-lg leading-relaxed text-stone-500 font-light">
-              I&apos;m Alex Evenson. I build companies, advise founders, and
-              write about what I&apos;m learning along the way.
+          <ScrollReveal>
+            <p className="text-[12px] tracking-[0.2em] uppercase text-[#d4a843]/60 mb-4">
+              03 — About
             </p>
-            <p className="text-lg leading-relaxed text-stone-500 font-light">
-              Right now I&apos;m building FlipFlap — a split-flap display
-              that costs 1/50th of a Vestaboard — and Dugout Sports, a
-              platform for the future of sports engagement. Through Evenrock
-              Capital, I advise early-stage founders on go-to-market, product,
-              and growth.
+            <h2 className="font-[family-name:var(--font-eb-garamond)] text-3xl sm:text-4xl font-normal italic tracking-tight text-[#f4eed5]">
+              A bit more
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <p className="font-[family-name:var(--font-cormorant)] mt-6 text-lg text-[#f4eed5]/60 font-light italic max-w-2xl">
+              Builder, writer, and someone who cares about making great things
+              accessible to everyone.
             </p>
-            <p className="text-lg leading-relaxed text-stone-500 font-light">
-              I believe in building in public, obsessing over craft, and
-              making beautiful products accessible to everyone.
-            </p>
-            <a
-              href="https://www.linkedin.com/in/alex-evenson-347147133/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-[13px] tracking-[0.15em] uppercase text-amber-800 hover:text-amber-900 transition-colors mt-2"
-            >
-              Full background on LinkedIn &rarr;
-            </a>
+          </ScrollReveal>
+          <div className="mt-12 flex flex-col gap-6">
+            {aboutItems.map((item, i) => (
+              <ScrollReveal key={item.slug} delay={0.1 * (i + 1)}>
+                <Link
+                  href={`/about/${item.slug}`}
+                  className="group flex items-start gap-4 border-l-2 border-[#d4a843]/20 pl-6 py-1 hover:border-[#d4a843] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <div>
+                    <p className="font-[family-name:var(--font-cormorant)] text-lg leading-relaxed text-[#f4eed5]/60 font-light italic group-hover:text-[#f4eed5]/80 transition-colors duration-300">
+                      {item.text}
+                    </p>
+                    <span className="inline-block mt-2 text-[11px] tracking-[0.15em] uppercase text-[#d4a843]/25 group-hover:text-[#d4a843]/60 transition-colors duration-300">
+                      Read more &rarr;
+                    </span>
+                  </div>
+                </Link>
+              </ScrollReveal>
+            ))}
+            <ScrollReveal delay={0.1 * (aboutItems.length + 1)}>
+              <a
+                href="https://www.linkedin.com/in/alex-evenson-347147133/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block ml-6 text-[12px] tracking-[0.15em] uppercase text-[#d4a843] hover:text-[#d4a843]/80 transition-colors mt-2"
+              >
+                Full background on LinkedIn &rarr;
+              </a>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
+      <RivetedSeam />
+
       {/* Contact */}
       <section id="contact" className="w-full py-28 sm:py-36">
         <div className="max-w-6xl mx-auto px-8">
-          <p className="text-[13px] tracking-[0.15em] uppercase text-amber-800/60 mb-4">
-            04 — Contact
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-stone-900">
-            Let&apos;s talk
-          </h2>
-          <p className="mt-6 text-lg text-stone-500 font-light max-w-2xl">
-            Want to work together? Tell me what you&apos;re building.
-          </p>
-          <ContactForm />
+          <ScrollReveal>
+            <p className="text-[12px] tracking-[0.2em] uppercase text-[#d4a843]/60 mb-4">
+              04 — Contact
+            </p>
+            <h2 className="font-[family-name:var(--font-eb-garamond)] text-3xl sm:text-4xl font-normal italic tracking-tight text-[#f4eed5]">
+              Let&apos;s talk
+            </h2>
+            <p className="font-[family-name:var(--font-cormorant)] mt-6 text-lg text-[#f4eed5]/60 font-light italic max-w-2xl">
+              Want to work together? Tell me what you&apos;re building.
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <ContactForm />
+          </ScrollReveal>
         </div>
       </section>
 

@@ -30,7 +30,7 @@ export const socials = [
   },
   {
     name: "Substack",
-    href: "#",
+    href: "https://alexevenson.substack.com",
     icon: (
       <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
         <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24l9.56-5.39L20.58 24V10.812H1.46zm21.08-8.648H1.46V0h21.08v2.164z" />

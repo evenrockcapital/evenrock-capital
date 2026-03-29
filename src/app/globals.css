@@ -1,15 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #1c1917;
+  --background: #0a2e17;
+  --foreground: #f4eed5;
+  --green-deep: #0a2e17;
+  --green-light: #0f3d22;
+  --green-lighter: #14492b;
+  --gold: #d4a843;
+  --gold-dim: rgba(212, 168, 67, 0.4);
+  --cream: #f4eed5;
+  --cream-dim: rgba(244, 238, 213, 0.55);
+  --cream-faint: rgba(244, 238, 213, 0.15);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-eb-garamond);
+  --font-body: var(--font-cormorant);
 }
 
 body {
@@ -27,6 +36,122 @@ html {
 
 /* Selection color */
 ::selection {
-  background-color: #d6d3d1;
-  color: #1c1917;
+  background-color: var(--gold);
+  color: var(--green-deep);
+}
+
+/* Substack article content styling */
+.prose-substack {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: rgba(244, 238, 213, 0.75);
+  font-weight: 300;
+}
+
+.prose-substack h1,
+.prose-substack h2,
+.prose-substack h3,
+.prose-substack h4 {
+  font-family: var(--font-eb-garamond), Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  color: #f4eed5;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.prose-substack h2 { font-size: 1.75rem; }
+.prose-substack h3 { font-size: 1.4rem; }
+.prose-substack h4 { font-size: 1.15rem; }
+
+.prose-substack p {
+  margin-bottom: 1.5rem;
+}
+
+.prose-substack a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(212, 168, 67, 0.3);
+  transition: text-decoration-color 0.2s;
+}
+
+.prose-substack a:hover {
+  text-decoration-color: var(--gold);
+}
+
+.prose-substack strong {
+  color: #f4eed5;
+  font-weight: 500;
+}
+
+.prose-substack em {
+  font-style: italic;
+}
+
+.prose-substack blockquote {
+  border-left: 2px solid rgba(212, 168, 67, 0.3);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  color: rgba(244, 238, 213, 0.55);
+}
+
+.prose-substack ul,
+.prose-substack ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose-substack li {
+  margin-bottom: 0.5rem;
+}
+
+.prose-substack img {
+  border-radius: 0.5rem;
+  margin: 2rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose-substack hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 2.5rem 0;
+}
+
+.prose-substack pre,
+.prose-substack code {
+  font-family: var(--font-inter), monospace;
+  font-style: normal;
+  font-size: 0.9rem;
+}
+
+.prose-substack pre {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose-substack code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+}
+
+.prose-substack pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Hide Substack embed elements that don't work on our site */
+.prose-substack .subscription-widget-wrap,
+.prose-substack .subscribe-widget,
+.prose-substack .footer,
+.prose-substack .tweet-embed {
+  display: none;
 }
