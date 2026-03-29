@@ -1,37 +1,50 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const links = [
-  { label: "Writing", href: "/#writing", sectionId: "writing" },
-  { label: "Now", href: "/#now", sectionId: "now" },
-  { label: "About", href: "/#about", sectionId: "about" },
-  { label: "Advisory", href: "/advisory", sectionId: null },
-  { label: "Contact", href: "/#contact", sectionId: "contact" },
+  { label: "Writing", href: "/#writing", sectionId: "writing", path: null },
+  { label: "Now", href: "/#now", sectionId: "now", path: null },
+  { label: "About", href: "/#about", sectionId: "about", path: null },
+  // { label: "Advisory", href: "/advisory", sectionId: null, path: "/advisory" },
+  { label: "Contact", href: "/#contact", sectionId: "contact", path: null },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
+    if (!isHome) {
+      setActiveSection(null);
+      return;
+    }
+
     const sectionIds = links
       .map((l) => l.sectionId)
       .filter((id): id is string => id !== null);
 
+    const visibilityMap = new Map<string, number>();
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          // Pick the one with the highest intersection ratio
-          const top = visible.reduce((a, b) =>
-            a.intersectionRatio > b.intersectionRatio ? a : b
-          );
-          setActiveSection(top.target.id);
-        }
+        entries.forEach((entry) => {
+          visibilityMap.set(entry.target.id, entry.intersectionRatio);
+        });
+        let bestId: string | null = null;
+        let bestRatio = 0;
+        visibilityMap.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        });
+        if (bestId) setActiveSection(bestId);
       },
-      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5] }
+      { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] }
     );
 
     sectionIds.forEach((id) => {
@@ -40,7 +53,7 @@ export default function Nav() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [isHome]);
 
   return (
     <nav className="w-full sticky top-0 bg-[#0a2e17]/95 backdrop-blur-sm z-50">
@@ -55,7 +68,9 @@ export default function Nav() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-10 text-[13px] font-light tracking-wide">
           {links.map((l) => {
-            const isActive = activeSection && l.sectionId === activeSection;
+            const isActive = l.path
+              ? pathname === l.path
+              : activeSection && l.sectionId === activeSection;
             return (
               <Link
                 key={l.label}
@@ -113,7 +128,7 @@ export default function Nav() {
               href={l.href}
               onClick={() => setOpen(false)}
               className={`text-[13px] tracking-wide transition-colors duration-300 ${
-                activeSection && l.sectionId === activeSection
+                (l.path ? pathname === l.path : activeSection && l.sectionId === activeSection)
                   ? "text-[#d4a843]"
                   : "text-white/50 hover:text-white/80"
               }`}

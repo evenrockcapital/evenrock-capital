@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, EB_Garamond, Cormorant_Garamond } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Nav from "@/components/Nav";
+import NavProgressBar from "@/components/NavProgressBar";
 import "./globals.css";
 
 const inter = Inter({
@@ -60,6 +61,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {/* Sox red top bar */}
         <div className="w-full h-[3px] bg-[#BD3039] shrink-0" />
+        <NavProgressBar />
         <Nav />
         {children}
         <Analytics />
