@@ -42,3 +42,7 @@ next-env.d.ts
 
 # temp files
 design-options.html
+
+# Design mockup files
+*.html
+!src/**/*.html

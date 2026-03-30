@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, EB_Garamond, Cormorant_Garamond } from "next/font/google";
+import { Inter, EB_Garamond, Cormorant_Garamond, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Nav from "@/components/Nav";
 import NavProgressBar from "@/components/NavProgressBar";
@@ -22,6 +22,13 @@ const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
   weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+});
+
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
 });
 
@@ -56,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${ebGaramond.variable} ${cormorantGaramond.variable} h-full antialiased`}
+      className={`${inter.variable} ${ebGaramond.variable} ${cormorantGaramond.variable} ${playfairDisplay.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {/* Sox red top bar */}

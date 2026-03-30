@@ -17,40 +17,56 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-[#0a2e17] text-[#f4eed5]">
       {/* Hero */}
-      <section className="w-full pt-16 pb-12 sm:pt-40 sm:pb-28">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-24">
-            {/* Headshot */}
-            <FadeIn delay={0.1} className="shrink-0">
-              <div className="w-40 h-52 sm:w-64 sm:h-80 lg:w-72 lg:h-96 rounded-2xl overflow-hidden border border-[#d4a843]/20 relative">
+      <section className="w-full pt-10 pb-8 sm:pt-20 sm:pb-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8">
+          <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 sm:gap-12 lg:gap-16">
+            {/* Headshot — left, height matches content */}
+            <FadeIn delay={0.1} className="shrink-0 lg:self-stretch">
+              <div className="w-52 h-64 sm:w-80 sm:h-[26rem] lg:w-[26rem] lg:h-full overflow-hidden relative">
                 <Image
                   src="/headshot.jpg"
                   alt="Alex Evenson"
                   fill
-                  sizes="(min-width: 1024px) 288px, (min-width: 640px) 256px, 160px"
-                  className="object-cover object-[center_20%]"
+                  sizes="(min-width: 1024px) 416px, (min-width: 640px) 320px, 208px"
+                  className="object-cover object-[center_40%]"
                   style={{
                     filter: "grayscale(100%) sepia(40%) hue-rotate(70deg) saturate(50%) brightness(0.85) contrast(1.1)",
+                    transform: "scale(0.85)",
                   }}
                   priority
                 />
               </div>
             </FadeIn>
+            {/* Content — right side */}
             <SplitFlapHero>
-              <div className="flex items-center gap-3">
-                {socials.map((s) => (
-                  <a
-                    key={s.name}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-[#d4a843] hover:border-[#d4a843]/40 hover:shadow-[0_0_12px_rgba(212,168,67,0.15)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#d4a843]"
-                    title={s.name}
-                    aria-label={s.name}
-                  >
-                    {s.icon}
-                  </a>
-                ))}
+              <div className="flex flex-col gap-5 mt-2">
+                <a
+                  href="mailto:alex@evenrock.capital"
+                  className="inline-flex items-center gap-3 text-[14px] text-white/50 hover:text-[#d4a843] transition-colors duration-300 w-fit"
+                >
+                  <span className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="2" y="4" width="20" height="16" rx="2"/>
+                      <path d="M22 4L12 13L2 4"/>
+                    </svg>
+                  </span>
+                  alex@evenrock.capital
+                </a>
+                <div className="flex items-center gap-3">
+                  {socials.map((s) => (
+                    <a
+                      key={s.name}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-[#d4a843] hover:border-[#d4a843]/40 hover:shadow-[0_0_12px_rgba(212,168,67,0.15)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#d4a843]"
+                      title={s.name}
+                      aria-label={s.name}
+                    >
+                      {s.icon}
+                    </a>
+                  ))}
+                </div>
               </div>
             </SplitFlapHero>
           </div>
