@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@types/sanitize-html": "^2.16.1",
     "@vercel/analytics": "^2.0.1",
     "fast-xml-parser": "^5.5.9",
     "framer-motion": "^12.38.0",
@@ -23,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/sanitize-html": "^2.16.1",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
